@@ -176,7 +176,6 @@ $.bsForm.fields.TIME = function (options) {
 	if (!options.hasOwnProperty("id")) {
 		options.id = $.bsForm.uniqueId();
 	}
-	var now = (new Date()).toLocaleTimeString();
 	var html = "";
 	html += "<div class=\"form-group\">";
 	html += "<label for=\"" + $.bsForm.escape(options.id) + "\">" + $.bsForm.escape(options.label) + "</label>";
@@ -301,14 +300,13 @@ $.bsForm.fields.CHECKBOX = function (options) {
 }
 
 $.bsForm.fields.HIDDEN = function (options) {
+	if (!options.hasOwnProperty("id")) {
+		options.id = $.bsForm.uniqueId();
+	}
 	if (!options.hasOwnProperty("value")) {
 		options.value = "";
 	}
-	var id = "";
-	if (options.hasOwnProperty("id")) {
-		id = "id=\"" + $.bsForm.escape(options.id) + "\"";
-	}
-	return "<input type=\"hidden\" name=\"" + $.bsForm.escape(options.name) + "\" " + id + " value=\"" + $.bsForm.escape(value) + "\">";
+	return "<input type=\"hidden\" name=\"" + $.bsForm.escape(options.name) + "\" id=\"" + $.bsForm.escape(options.id) + "\" value=\"" + $.bsForm.escape(options.value) + "\">";
 }
 
 $.bsForm.fields.STATIC = function (options) {
