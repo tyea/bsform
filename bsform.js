@@ -45,6 +45,9 @@ $.bsForm.defaults = function (options) {
 		if (!options.submit.hasOwnProperty("before")) {
 			options.submit.before = $.bsForm.submitBefore
 		}
+		if (!options.submit.hasOwnProperty("success")) {
+			options.submit.success = $.bsForm.submitSuccess;
+		}
 		if (!options.submit.hasOwnProperty("error")) {
 			options.submit.error = $.bsForm.submitError;
 		}
@@ -369,6 +372,13 @@ $.bsForm.ready = function (form, options) {
 
 // -----------------------------------------------------------------------------
 
+$.bsForm.messages = {
+	success: "Hooray, that worked!",
+	error: "Whoops, something went wrong!"
+};
+
+// -----------------------------------------------------------------------------
+
 $.bsForm.load = function (form, options) {
 	var fieldset = form.find("fieldset");
 	fieldset.attr("disabled", "disabled");
@@ -386,7 +396,7 @@ $.bsForm.load = function (form, options) {
 			fieldset.removeAttr("disabled");
 		},
 		error: function (jqXhr) {
-			alert.text("Whoops, something went wrong!").show();
+			alert.html($.bsForm.escape($.bsForm.messages.error)).show();
 			var errors = [];
 			if (jqXhr.hasOwnProperty("responseJSON") && jqXhr.responseJSON.hasOwnProperty("errors")) {
 				errors = jqXhr.responseJSON.errors;
@@ -413,6 +423,8 @@ $.bsForm.loadSuccess = function (form, data) {
 };
 
 $.bsForm.loadError = function (form, errors) {
+	var alert = form.find(".alert");
+	alert.html($.bsForm.escape($.bsForm.messages.error)).show();
 };
 
 // -----------------------------------------------------------------------------
@@ -503,7 +515,7 @@ $.bsForm.submit = function (form, options) {
 			options.submit.success(form, data);
 		},
 		error: function (jqXhr) {
-			alert.text("Whoops, something went wrong!").show();
+			alert.html($.bsForm.escape($.bsForm.messages.error)).show();
 			var errors = [];
 			if (jqXhr.hasOwnProperty("responseJSON") && jqXhr.responseJSON.hasOwnProperty("errors")) {
 				errors = jqXhr.responseJSON.errors;
@@ -520,10 +532,14 @@ $.bsForm.submitBefore = function (form, data) {
 	return data;
 };
 
+$.bsForm.submitSuccess = function (form, data) {
+	form.replaceWith("<p class=\"alert alert-success\">" + $.bsForm.escape($.bsForm.messages.success) + "</p>");
+};
+
 $.bsForm.submitError = function (form, errors) {
 	$.each(errors, function (name, error) {
 		var field = form.find("[name=\"" + $.bsForm.escape(name) + "\"]").first();
 		var help = field.closest(".form-group").find(".help-block span");
-		help.text(error);
+		help.html($.bsForm.escape(error));
 	});
 };

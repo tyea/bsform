@@ -47,10 +47,7 @@ yarn add https://github.com/tyea/bsform.git#1.0.1
 			],
 			submit: {
 				method: "POST",
-				url: "/post.php",
-				success: function (form, data) {
-					alert("Success");
-				}
+				url: "/post.php"
 			}
 		});
 	});
