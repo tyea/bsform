@@ -7,7 +7,7 @@ BsForm is a jQuery plugin for building AJAX driven Bootstrap forms.
 ## Installation
 
 ```
-yarn add https://github.com/tyea/bsform.git#1.0.1
+yarn add https://github.com/tyea/bsform.git#1.1.0
 ```
 
 ## Requirements
@@ -25,7 +25,7 @@ yarn add https://github.com/tyea/bsform.git#1.0.1
 			fields: [
 				{
 					type: "TEXT",
-					label: "First Name",W
+					label: "First Name",
 					name: "first_name"
 				},
 				{
