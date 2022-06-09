@@ -373,8 +373,8 @@ $.bsForm.ready = function (form, options) {
 // -----------------------------------------------------------------------------
 
 $.bsForm.messages = {
-	success: "Hooray, that worked!",
-	error: "Whoops, something went wrong!"
+	success: "Hooray, that worked.",
+	error: "Whoops, something went wrong."
 };
 
 // -----------------------------------------------------------------------------
